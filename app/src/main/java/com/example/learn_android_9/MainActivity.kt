@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         val intentFilter = IntentFilter()
+        //系统每隔一分钟发一次TiME_TICK
         intentFilter.addAction("android.intent.action.TIME_TICK")
         timeChangeBroadcastReceiver = TimeChangeBroadcastReceiver()
         registerReceiver(timeChangeBroadcastReceiver, intentFilter)

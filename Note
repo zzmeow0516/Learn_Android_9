@@ -1,10 +1,25 @@
 1.
-广播注册方式：代码中动态注册，xml中静态注册。
+广播类型：
+有序广播，标准广播
 
-1.1
-动态注册方式：
-    新建广播类 class MyBroadcastReceiver, 在类中override onReceive(), 在onReceive()中定义接收到广播后的逻辑
-    MainActivity类中定义lateinit var myBroadcastReceiver
-    onCreate中定义intentFilter, 再加入想要监听的广播（定义在Intent.java中）： intentFliter.addACtion("Action_xxx")
-    实例化一个MyBroadcastReceiver, 调用registerReceiver注册接收器，并将intentFilter传进去：registerReceiver(myBroadcastReceiver, intentFilter)
-    重写onDestroy,并在里面取消注册接收器unregisterReceiver()
+2. 广播注册方式：
+代码中动态注册，xml中静态注册。
+    2.1 动态注册方式：
+        新建广播类 class MyBroadcastReceiver, 在类中override onReceive(), 在onReceive()中定义接收到广播后的逻辑
+        MainActivity类中定义lateinit var myBroadcastReceiver
+        onCreate中定义intentFilter, 再加入想要监听的广播（定义在Intent.java中）： intentFliter.addACtion("Action_xxx")
+        实例化一个MyBroadcastReceiver, 调用registerReceiver注册接收器，并将intentFilter传进去：registerReceiver(myBroadcastReceiver, intentFilter)
+        重写onDestroy,并在里面取消注册接收器unregisterReceiver()
+
+    2.2 静态注册方式：
+        新建需要的receiver类继承自BroadcastReceiver： class BootCompleteReceiver: BroadcastReceiver(){...}
+        在AndroidManifest.xml的application标签下添加receiver标签，并把自定义的广播接受器类名写进去
+        在receiver标签中添加intent-filter标签，并把想要监听的广播添加进去
+        声明所需要的权限
+        此时静态注册完成，可以在自定义接收器的类的onCreate中写逻辑了
+
+3.
+查看所有系统广播
+D:\Software\AndroidSDK\platforms\android-34\data\broadcast_actions.txt
+隐式广播静态注册豁免情况
+https://developer.android.google.cn/develop/background-work/background-tasks/broadcasts/broadcast-exceptions?hl=zh-cn
