@@ -1,0 +1,10 @@
+1.
+广播注册方式：代码中动态注册，xml中静态注册。
+
+1.1
+动态注册方式：
+    新建广播类 class MyBroadcastReceiver, 在类中override onReceive(), 在onReceive()中定义接收到广播后的逻辑
+    MainActivity类中定义lateinit var myBroadcastReceiver
+    onCreate中定义intentFilter, 再加入想要监听的广播（定义在Intent.java中）： intentFliter.addACtion("Action_xxx")
+    实例化一个MyBroadcastReceiver, 调用registerReceiver注册接收器，并将intentFilter传进去：registerReceiver(myBroadcastReceiver, intentFilter)
+    重写onDestroy,并在里面取消注册接收器unregisterReceiver()
