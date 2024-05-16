@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             //我们自定义的广播正好就是隐式广播
             //所以要通过intent.setPackage指定要将广播发给哪一个app，让自定义广播变成显式广播
             intent.setPackage(packageName)
-            sendBroadcast(intent)
+            sendOrderedBroadcast(intent, null)
         }
     }
 

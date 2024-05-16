@@ -33,3 +33,10 @@ https://developer.android.google.cn/develop/background-work/background-tasks/bro
             3.1 val intent = Intent(com.xxx.xxx.xxx.MY_BROADCAST)   //这个com.xxx.xxx一定要写，详情看Intent定义
             3.2 intent.setPackage(package)          //目的是为了将自定义广播变成显式广播
             3,3 sendBroadcast(intent)
+
+    4.2 有序广播
+        1. 在发送广播的地方调用sendOrderedBroadcast(intent, null)
+        2. 定义另一个接收器AnotherHeadsetReceiver
+        3. 在AndroidManifest.xml中定义这个接收器的intent-filter，并且把自定义广播加进去
+        4. 在intent-filter 标签 上 定义receiver优先级，范围是-1000~1000
+        5，在优先级高的receiver的onReceive中处理截断abortBroadcast

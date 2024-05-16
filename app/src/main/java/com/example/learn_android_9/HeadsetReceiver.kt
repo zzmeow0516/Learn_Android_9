@@ -10,7 +10,8 @@ class HeadsetReceiver : BroadcastReceiver() {
 
     private val TAG = "mylog_HeadsetReceiver"
     override fun onReceive(context: Context, intent: Intent) {
-        Toast.makeText(context, "headset state changed!", Toast.LENGTH_SHORT).show()
-        Log.v(TAG, "headset state changed!")
+        Toast.makeText(context, "received in HeadsetReceiver !", Toast.LENGTH_SHORT).show()
+        Log.v(TAG, "received in HeadsetReceiver !")
+        abortBroadcast()
     }
 }
