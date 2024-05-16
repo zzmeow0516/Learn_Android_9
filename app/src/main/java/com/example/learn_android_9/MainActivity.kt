@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -33,6 +34,18 @@ class MainActivity : AppCompatActivity() {
         intentFilter.addAction("android.intent.action.TIME_TICK")
         timeChangeBroadcastReceiver = TimeChangeBroadcastReceiver()
         registerReceiver(timeChangeBroadcastReceiver, intentFilter)
+
+        val buttonSendBroadcast = findViewById<Button>(R.id.button_sendMyBroadcast)
+        buttonSendBroadcast.setOnClickListener {
+            //用到的构造方法是public Intent(String action) {  setAction(action) }
+            val intent = Intent("com.example.learn_android_9.HEADSET_STATE_ACTION")
+            //实际调用getPackage(),setPackage用于传入包名，
+            //为什么要传入包名，因为我们的HeadsetReceiver是静态注册的，他不能够接收隐式广播
+            //我们自定义的广播正好就是隐式广播
+            //所以要通过intent.setPackage指定要将广播发给哪一个app，让自定义广播变成显式广播
+            intent.setPackage(packageName)
+            sendBroadcast(intent)
+        }
     }
 
     override fun onDestroy() {
