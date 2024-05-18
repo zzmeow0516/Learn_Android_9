@@ -9,11 +9,10 @@ import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private val TAG = "mylog_BroadcastReceiver"
 
@@ -40,12 +39,19 @@ class MainActivity : AppCompatActivity() {
             //用到的构造方法是public Intent(String action) {  setAction(action) }
             val intent = Intent("com.example.learn_android_9.HEADSET_STATE_ACTION")
             //实际调用getPackage(),setPackage用于传入包名，
-            //为什么要传入包名，因为我们的HeadsetReceiver是静态注册的，他不能够接收隐式广播
+            //为什么要传入包名，因为我们的HeadsetReceiver是静态注册的，他不能够接收大部分隐式广播
             //我们自定义的广播正好就是隐式广播
             //所以要通过intent.setPackage指定要将广播发给哪一个app，让自定义广播变成显式广播
             intent.setPackage(packageName)
             sendOrderedBroadcast(intent, null)
         }
+
+        val buttonForceOffline = findViewById<Button>(R.id.button_forceOffline)
+        buttonForceOffline.setOnClickListener() {
+            val intent = Intent("com.example.learn_android_9.FORCE_OFFLINE")
+            sendBroadcast(intent)
+        }
+
     }
 
     override fun onDestroy() {

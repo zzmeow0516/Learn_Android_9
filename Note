@@ -27,7 +27,7 @@ https://developer.android.google.cn/develop/background-work/background-tasks/bro
 
 4.发送自定义广播
     4.1 标准广播
-        1. 自定义广播接收器MyBroadcastReceiver, 重写onReceive()并写好发送广播后需要的逻辑
+        1. 自定义广播接收器MyBroadcastReceiver, 重写onReceive()并写好接收广播后需要的逻辑
         2. 在AndroidManifest.xml中配置好receiver，并将我们自定义的广播加到intent-filter标签中
         3. 处理发送广播的逻辑，比如在layout中定义一个按钮，按钮监听按下后通过intent发送广播
             3.1 val intent = Intent(com.xxx.xxx.xxx.MY_BROADCAST)   //这个com.xxx.xxx一定要写，详情看Intent定义
